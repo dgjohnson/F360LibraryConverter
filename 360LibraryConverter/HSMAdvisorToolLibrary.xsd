@@ -1,0 +1,242 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Qty" type="xs:byte"/>
+  <xs:element name="MinQty" type="xs:byte"/>
+  <xs:element name="MaxQty" type="xs:byte"/>
+  <xs:element name="OnOrderQty" type="xs:byte"/>
+  <xs:element name="Received" type="xs:byte"/>
+  <xs:element name="Price" type="xs:byte"/>
+  <xs:element name="guid" type="xs:string"/>
+  <xs:element name="library" type="xs:string"/>
+  <xs:element name="comment" type="xs:string"/>
+  <xs:element name="brand_name" type="xs:string"/>
+  <xs:element name="series_name" type="xs:string"/>
+  <xs:element name="supplier" type="xs:string"/>
+  <xs:element name="supplier_pid" type="xs:string"/>
+  <xs:element name="create_date" type="xs:dateTime"/>
+  <xs:element name="update_date" type="xs:dateTime"/>
+  <xs:element name="Stock">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Qty"/>
+        <xs:element ref="MinQty"/>
+        <xs:element ref="MaxQty"/>
+        <xs:element ref="OnOrderQty"/>
+        <xs:element ref="Received"/>
+        <xs:element ref="Price"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="id" type="xs:byte"/>
+  <xs:element name="user_id" type="xs:byte"/>
+  <xs:element name="type" type="xs:string"/>
+  <xs:element name="maxdeflection_pc" type="xs:byte"/>
+  <xs:element name="maxtorque_pc" type="xs:byte"/>
+  <xs:element name="productivity" type="xs:byte"/>
+  <xs:element name="thread_drill_dia" type="xs:byte"/>
+  <xs:element name="thread_drill_dia_m" type="xs:byte"/>
+  <xs:element name="custom_SF" type="xs:byte"/>
+  <xs:element name="generic" type="xs:byte"/>
+  <xs:element name="Offset_Diameter" type="xs:byte"/>
+  <xs:element name="Offset_Length" type="xs:byte"/>
+  <xs:element name="Coolant" type="xs:byte"/>
+  <xs:element name="isInsert" type="xs:byte"/>
+  <xs:element name="number" type="xs:byte"/>
+  <xs:element name="diameter" type="xs:float"/>
+  <xs:element name="stickout" type="xs:float"/>
+  <xs:element name="corner_rad" type="xs:float"/>
+  <xs:element name="instock" type="xs:byte"/>
+  <xs:element name="stock.OrderQty" type="xs:byte"/>
+  <xs:element name="stock.MinQty" type="xs:byte"/>
+  <xs:element name="stock.MaxQty" type="xs:byte"/>
+  <xs:element name="stock.OnOrderQty" type="xs:byte"/>
+  <xs:element name="stock.Received" type="xs:byte"/>
+  <xs:element name="stock.Price" type="xs:byte"/>
+  <xs:element name="tool_life" type="xs:byte"/>
+  <xs:element name="rating" type="xs:byte"/>
+  <xs:element name="Shank_Dia" type="xs:float"/>
+  <xs:element name="Flute_N" type="xs:byte"/>
+  <xs:element name="Flute_Len" type="xs:float"/>
+  <xs:element name="Shoulder_Len" type="xs:float"/>
+  <xs:element name="Shoulder_Dia" type="xs:float"/>
+  <xs:element name="Shoulder_Tapered" type="xs:byte"/>
+  <xs:element name="helix_angle" type="xs:byte"/>
+  <xs:element name="leadangle" type="xs:byte"/>
+  <xs:element name="leadangle_mode" type="xs:byte"/>
+  <xs:element name="tool_material_id" type="xs:byte"/>
+  <xs:element name="name_id" type="xs:byte"/>
+  <xs:element name="coating_id" type="xs:byte"/>
+  <xs:element name="rampmilling" type="xs:byte"/>
+  <xs:element name="ramp" type="xs:byte"/>
+  <xs:element name="peck" type="xs:byte"/>
+  <xs:element name="doc" type="xs:float"/>
+  <xs:element name="woc" type="xs:float"/>
+  <xs:element name="sfm_adj" type="xs:byte"/>
+  <xs:element name="ipt_adj" type="xs:byte"/>
+  <xs:element name="tool_maxrpm" type="xs:byte"/>
+  <xs:element name="depth" type="xs:byte"/>
+  <xs:element name="circle_comp" type="xs:byte"/>
+  <xs:element name="hsm" type="xs:byte"/>
+  <xs:element name="hss" type="xs:byte"/>
+  <xs:element name="circle_dia" type="xs:byte"/>
+  <xs:element name="circle_external" type="xs:byte"/>
+  <xs:element name="thread_pitch" type="xs:byte"/>
+  <xs:element name="Pilot_Hole" type="xs:byte"/>
+  <xs:element name="diameter_mm" type="xs:byte"/>
+  <xs:element name="Shank_Dia_mm" type="xs:byte"/>
+  <xs:element name="flute_len_mm" type="xs:byte"/>
+  <xs:element name="stickout_mm" type="xs:byte"/>
+  <xs:element name="corner_rad_mm" type="xs:byte"/>
+  <xs:element name="doc_mm" type="xs:byte"/>
+  <xs:element name="woc_mm" type="xs:byte"/>
+  <xs:element name="ipt_mm" type="xs:byte"/>
+  <xs:element name="sfm_mm" type="xs:byte"/>
+  <xs:element name="feed_mm" type="xs:byte"/>
+  <xs:element name="input_units_mm" type="xs:byte"/>
+  <xs:element name="result_units_mm" type="xs:byte"/>
+  <xs:element name="circle_dia_mm" type="xs:byte"/>
+  <xs:element name="depth_mm" type="xs:byte"/>
+  <xs:element name="shoulder_len_mm" type="xs:byte"/>
+  <xs:element name="peck_mm" type="xs:byte"/>
+  <xs:element name="thread_pitch_m" type="xs:byte"/>
+  <xs:element name="Shoulder_Dia_mm" type="xs:byte"/>
+  <xs:element name="Pilot_Hole_mm" type="xs:byte"/>
+  <xs:element name="Cuts" type="xs:string"/>
+  <xs:element name="Tool">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="guid"/>
+        <xs:element ref="library"/>
+        <xs:element ref="comment"/>
+        <xs:element ref="brand_name"/>
+        <xs:element ref="series_name"/>
+        <xs:element ref="supplier"/>
+        <xs:element ref="supplier_pid"/>
+        <xs:element ref="create_date"/>
+        <xs:element ref="update_date"/>
+        <xs:element ref="Stock"/>
+        <xs:element ref="id"/>
+        <xs:element ref="user_id"/>
+        <xs:element ref="type"/>
+        <xs:element ref="maxdeflection_pc"/>
+        <xs:element ref="maxtorque_pc"/>
+        <xs:element ref="productivity"/>
+        <xs:element ref="thread_drill_dia"/>
+        <xs:element ref="thread_drill_dia_m"/>
+        <xs:element ref="custom_SF"/>
+        <xs:element ref="generic"/>
+        <xs:element ref="Offset_Diameter"/>
+        <xs:element ref="Offset_Length"/>
+        <xs:element ref="Coolant"/>
+        <xs:element ref="isInsert"/>
+        <xs:element ref="number"/>
+        <xs:element ref="diameter"/>
+        <xs:element ref="stickout"/>
+        <xs:element ref="corner_rad"/>
+        <xs:element ref="instock"/>
+        <xs:element ref="stock.OrderQty"/>
+        <xs:element ref="stock.MinQty"/>
+        <xs:element ref="stock.MaxQty"/>
+        <xs:element ref="stock.OnOrderQty"/>
+        <xs:element ref="stock.Received"/>
+        <xs:element ref="stock.Price"/>
+        <xs:element ref="tool_life"/>
+        <xs:element ref="rating"/>
+        <xs:element ref="Shank_Dia"/>
+        <xs:element ref="Flute_N"/>
+        <xs:element ref="Flute_Len"/>
+        <xs:element ref="Shoulder_Len"/>
+        <xs:element ref="Shoulder_Dia"/>
+        <xs:element ref="Shoulder_Tapered"/>
+        <xs:element ref="helix_angle"/>
+        <xs:element ref="leadangle"/>
+        <xs:element ref="leadangle_mode"/>
+        <xs:element ref="tool_material_id"/>
+        <xs:element ref="name_id"/>
+        <xs:element ref="coating_id"/>
+        <xs:element ref="rampmilling"/>
+        <xs:element ref="ramp"/>
+        <xs:element ref="peck"/>
+        <xs:element ref="doc"/>
+        <xs:element ref="woc"/>
+        <xs:element ref="sfm_adj"/>
+        <xs:element ref="ipt_adj"/>
+        <xs:element ref="tool_maxrpm"/>
+        <xs:element ref="depth"/>
+        <xs:element ref="circle_comp"/>
+        <xs:element ref="hsm"/>
+        <xs:element ref="hss"/>
+        <xs:element ref="circle_dia"/>
+        <xs:element ref="circle_external"/>
+        <xs:element ref="thread_pitch"/>
+        <xs:element ref="Pilot_Hole"/>
+        <xs:element ref="diameter_mm"/>
+        <xs:element ref="Shank_Dia_mm"/>
+        <xs:element ref="flute_len_mm"/>
+        <xs:element ref="stickout_mm"/>
+        <xs:element ref="corner_rad_mm"/>
+        <xs:element ref="doc_mm"/>
+        <xs:element ref="woc_mm"/>
+        <xs:element ref="ipt_mm"/>
+        <xs:element ref="sfm_mm"/>
+        <xs:element ref="feed_mm"/>
+        <xs:element ref="input_units_mm"/>
+        <xs:element ref="result_units_mm"/>
+        <xs:element ref="circle_dia_mm"/>
+        <xs:element ref="depth_mm"/>
+        <xs:element ref="shoulder_len_mm"/>
+        <xs:element ref="peck_mm"/>
+        <xs:element ref="thread_pitch_m"/>
+        <xs:element ref="Shoulder_Dia_mm"/>
+        <xs:element ref="Pilot_Hole_mm"/>
+        <xs:element ref="Cuts"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="Library">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DB_Shared" type="xs:string"/>
+  <xs:element name="Tools">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Tool" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Libraries">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Library"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CustomSFMs" type="xs:string"/>
+  <xs:element name="ToolRequests" type="xs:string"/>
+  <xs:element name="settings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="DB_Shared"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Holders" type="xs:string"/>
+  <xs:element name="MachineInterfaces" type="xs:string"/>
+  <xs:element name="DataBase">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Tools"/>
+        <xs:element ref="Libraries"/>
+        <xs:element ref="CustomSFMs"/>
+        <xs:element ref="ToolRequests"/>
+        <xs:element ref="settings"/>
+        <xs:element ref="Holders"/>
+        <xs:element ref="MachineInterfaces"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "360LibraryConverter", "360LibraryConverter\360LibraryConverter.csproj", "{2B015458-8F84-48A2-9C55-8E418DBD51FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B015458-8F84-48A2-9C55-8E418DBD51FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B015458-8F84-48A2-9C55-8E418DBD51FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B015458-8F84-48A2-9C55-8E418DBD51FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B015458-8F84-48A2-9C55-8E418DBD51FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34691941-EA16-431D-914C-08817CC36C53}
+	EndGlobalSection
+EndGlobal
