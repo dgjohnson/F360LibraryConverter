@@ -60,7 +60,7 @@
     <ManifestKeyFile>F360LibraryConverter_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>F360LibraryConverter_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
@@ -168,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DIYEngineering.ico" />
+    <EmbeddedResource Include="FairyDust.wav" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

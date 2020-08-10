@@ -248,7 +248,7 @@ namespace _360LibraryConverter
             btnImport.BackColor = SystemColors.Highlight;
             btnConvert.BackColor = SystemColors.GradientInactiveCaption;
 
-            playSound();
+            playSound("tada.wav");
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -261,12 +261,26 @@ namespace _360LibraryConverter
             System.Diagnostics.Process.Start("https://www.youtube.com/c/DIYEngineering/videos");
         }
 
-        private void playSound()
+        private void playSound(string resName)
         {
             System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
-            System.IO.Stream s = a.GetManifestResourceStream("_360LibraryConverter.tada.wav");
+            System.IO.Stream s = a.GetManifestResourceStream("_360LibraryConverter."+resName);
             SoundPlayer player = new SoundPlayer(s);
             player.Play();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            playSound("FairyDust.wav");
+            toolTip1.SetToolTip(btnImport, "Select the tool library that was exported as JSON from Fusion360.");
+            toolTip1.SetToolTip(groupBox1, "Select the way that tools should be grouped in HSMAdvisor.");
+            toolTip1.SetToolTip(btnConvert, "Click the button to create a new HSMAdvisor tool library file from the Fusion360 JSON information.");
+            toolTip1.SetToolTip(radioButton1, "Select this to create libraries using the tools vendor name.");
+            toolTip1.SetToolTip(radioButton2, "Select this to put all tools in a single library.");
+            toolTip1.SetToolTip(linkLabel1, "Subscribe to the channel for more like this.");
+            toolTip1.SetToolTip(pictureBox1, "Hey there!");
+            toolTip1.SetToolTip(textBoxLibraryName, "Enter a useful library name here!");
+
         }
     }
 }

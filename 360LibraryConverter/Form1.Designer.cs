@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.ImportFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnImport = new System.Windows.Forms.Button();
@@ -43,6 +44,7 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -89,7 +91,7 @@
             this.btnConvert.Location = new System.Drawing.Point(149, 116);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(245, 23);
-            this.btnConvert.TabIndex = 2;
+            this.btnConvert.TabIndex = 4;
             this.btnConvert.Text = "Convert To HSMAdvisor Tool Library File";
             this.btnConvert.UseVisualStyleBackColor = false;
             this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
@@ -102,7 +104,7 @@
             this.labelStatus.Location = new System.Drawing.Point(149, 142);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(245, 17);
-            this.labelStatus.TabIndex = 3;
+            this.labelStatus.TabIndex = 5;
             this.labelStatus.Text = "Waiting...";
             this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -123,7 +125,7 @@
             this.linkLabel1.Location = new System.Drawing.Point(195, 192);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(149, 13);
-            this.linkLabel1.TabIndex = 5;
+            this.linkLabel1.TabIndex = 7;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "http://youtube.diy.engineering ";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -144,7 +146,7 @@
             this.progressBar1.Location = new System.Drawing.Point(149, 162);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(245, 15);
-            this.progressBar1.TabIndex = 8;
+            this.progressBar1.TabIndex = 6;
             // 
             // groupBox1
             // 
@@ -164,7 +166,7 @@
             this.textBoxLibraryName.Location = new System.Drawing.Point(162, 19);
             this.textBoxLibraryName.Name = "textBoxLibraryName";
             this.textBoxLibraryName.Size = new System.Drawing.Size(77, 20);
-            this.textBoxLibraryName.TabIndex = 2;
+            this.textBoxLibraryName.TabIndex = 3;
             this.textBoxLibraryName.Text = "My Library";
             // 
             // radioButton2
@@ -173,7 +175,7 @@
             this.radioButton2.Location = new System.Drawing.Point(96, 20);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(60, 17);
-            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabIndex = 2;
             this.radioButton2.Text = "Custom";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -184,7 +186,7 @@
             this.radioButton1.Location = new System.Drawing.Point(7, 20);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(83, 17);
-            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabIndex = 1;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Tool Vendor";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -224,6 +226,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Fusion360 Tool Library Converter";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -248,6 +251,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
