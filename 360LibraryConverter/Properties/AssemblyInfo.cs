@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("360LibraryConverter")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("F360LibraryConverter")]
+[assembly: AssemblyDescription("Windows application that can convert Fusion360 Exported Tool Libraries in JSON format to HSMAdvisor compatible Library in XML format.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("360LibraryConverter")]
+[assembly: AssemblyCompany("DIY.Engineering LLC")]
+[assembly: AssemblyProduct("F360LibraryConverter")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("DIY.Engineering")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

@@ -103,130 +103,138 @@ namespace _360LibraryConverter
                 labelStatus.Text = "Converting Tool: " + tool.Description;
                 this.Refresh();
 
-                //setup new tool
-                XmlNode newTool = templateTool.CloneNode(true);
-                newTool.SelectSingleNode("/guid").InnerText = tool.Guid.ToString();
-
-                //set the apropriate library
-                labelStatus.Text = "Creating Library...";
-                this.Refresh();
-                switch (radioButton1.Checked) //user library name selection
+                if (tool.Type == "holder")
                 {
-                    case true://use vendor name
-                        newTool.SelectSingleNode("/library").InnerText = tool.Vendor.ToString();
-                        libraryName = tool.Vendor.ToString();
-                        break;
-                    case false://use custom library
-                        newTool.SelectSingleNode("/library").InnerText = textBoxLibraryName.Text;
-                        libraryName = textBoxLibraryName.Text;
-                        break;
+                    continue;
                 }
-                XmlNode libNode = doc.SelectSingleNode("//Libraries/Library[name='" + libraryName + "']");
-                if (libNode == null)//library doesnt exist yet, add it.
+                else
                 {
-                    templateLibrary.SelectSingleNode("/name").InnerText = libraryName;
-                    doc.SelectSingleNode("//Libraries").AppendChild(templateLibrary.CloneNode(true));
-                }
 
-                labelStatus.Text = "Updating Tool Attributes...";
-                this.Refresh();
-                newTool.SelectSingleNode("/comment").InnerText = tool.Description.ToString();
-                newTool.SelectSingleNode("/brand_name").InnerText = tool.Vendor.ToString();
-                newTool.SelectSingleNode("/series_name").InnerText = tool.Type.ToString();
-                newTool.SelectSingleNode("/supplier").InnerText = tool.Vendor.ToString();
-                newTool.SelectSingleNode("/supplier_pid").InnerText = tool.ProductId.ToString();
-                newTool.SelectSingleNode("/series_name").InnerText = tool.Type.ToString();
-                newTool.SelectSingleNode("/create_date").InnerText = tool.LastModified == null ? DateTimeOffset.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'") : DateTimeOffset.FromUnixTimeMilliseconds((long)tool.LastModified).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
-                newTool.SelectSingleNode("/update_date").InnerText = DateTimeOffset.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
-                newTool.SelectSingleNode("/id").InnerText = "0";
-                newTool.SelectSingleNode("/user_id").InnerText = "0";
-                switch (tool.Unit)
-                {
-                    case "inches":
-                        newTool.SelectSingleNode("/diameter").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Dc.ToString();
-                        newTool.SelectSingleNode("/stickout").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Lb.ToString();
-                        newTool.SelectSingleNode("/Shank_Dia").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Sfdm.ToString();
-                        newTool.SelectSingleNode("/Flute_Len").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Lcf.ToString();
-                        newTool.SelectSingleNode("/Shoulder_Len").InnerText = tool.Geometry == null ? "0" : tool.Geometry.ShoulderLength.ToString();
-                        newTool.SelectSingleNode("/Shoulder_Dia").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Sfdm.ToString();
-                        newTool.SelectSingleNode("/diameter_mm").InnerText = "0";
-                        newTool.SelectSingleNode("/stickout_mm").InnerText = "0";
-                        newTool.SelectSingleNode("/Shank_Dia_mm").InnerText = "0";
-                        newTool.SelectSingleNode("/flute_len_mm").InnerText = "0";
-                        newTool.SelectSingleNode("/shoulder_len_mm").InnerText = "0";
-                        newTool.SelectSingleNode("/Shoulder_Dia_mm").InnerText = "0";
-                        break;
-                    case "millimeters":
-                        newTool.SelectSingleNode("/diameter").InnerText = "0";
-                        newTool.SelectSingleNode("/stickout").InnerText = "0";
-                        newTool.SelectSingleNode("/Shank_Dia").InnerText = "0";
-                        newTool.SelectSingleNode("/Flute_Len").InnerText = "0";
-                        newTool.SelectSingleNode("/Shoulder_Len").InnerText = "0";
-                        newTool.SelectSingleNode("/Shoulder_Dia").InnerText = "0";
-                        newTool.SelectSingleNode("/diameter_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Dc.ToString();
-                        newTool.SelectSingleNode("/stickout_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Lb.ToString();
-                        newTool.SelectSingleNode("/Shank_Dia_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Sfdm.ToString();
-                        newTool.SelectSingleNode("/flute_len_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Lcf.ToString();
-                        newTool.SelectSingleNode("/shoulder_len_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.ShoulderLength.ToString();
-                        newTool.SelectSingleNode("/Shoulder_Dia_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Sfdm.ToString();
-                        break;
-                }
-                switch (tool.Type)
-                {
-                    case "flat end mill":
-                        newTool.SelectSingleNode("/type").InnerText = "endmill";
-                        newTool.SelectSingleNode("/corner_rad").InnerText = "0";
-                        break;
-                    case "ball end mill":
-                        newTool.SelectSingleNode("/type").InnerText = "endmill";
-                        double rad = (double)(tool.Geometry.Dc == null ? 0 : tool.Geometry.Dc / 2);
-                        newTool.SelectSingleNode("/corner_rad").InnerText = rad.ToString();
-                        break;
-                    case "chamfer mill":
-                        newTool.SelectSingleNode("/type").InnerText = "chamfermill";
-                        newTool.SelectSingleNode("/corner_rad").InnerText = "0";
-                        break;
-                    case "thread mill":
-                        newTool.SelectSingleNode("/type").InnerText = "threadmill";
-                        newTool.SelectSingleNode("/corner_rad").InnerText = "0";
-                        break;
-                    default:
-                        newTool.SelectSingleNode("/type").InnerText = "endmill";
-                        newTool.SelectSingleNode("/corner_rad").InnerText = "0";
-                        break;
-                }
+                    //setup new tool
+                    XmlNode newTool = templateTool.CloneNode(true);
+                    newTool.SelectSingleNode("/guid").InnerText = tool.Guid.ToString();
 
-                newTool.SelectSingleNode("/number").InnerText = tool.PostProcess == null ? "0" : tool.PostProcess.Number.ToString();
-                newTool.SelectSingleNode("/Flute_N").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Nof.ToString();
-                switch (tool.Bmc)
-                {
-                    case "carbide":
-                        newTool.SelectSingleNode("/tool_material_id").InnerText = "5";
-                        newTool.SelectSingleNode("/coating_id").InnerText = "1";
-                        break;
-                    case "ti coated":
-                        newTool.SelectSingleNode("/tool_material_id").InnerText = "5";
-                        newTool.SelectSingleNode("/coating_id").InnerText = "2";
-                        break;
-                    case "hss":
-                        newTool.SelectSingleNode("/tool_material_id").InnerText = "1";
-                        newTool.SelectSingleNode("/coating_id").InnerText = "1";
-                        break;
-                    case "ceramics":
-                        newTool.SelectSingleNode("/tool_material_id").InnerText = "10";
-                        newTool.SelectSingleNode("/coating_id").InnerText = "1";
-                        break;
-                    case "unspecified":
-                        newTool.SelectSingleNode("/tool_material_id").InnerText = "1";
-                        newTool.SelectSingleNode("/coating_id").InnerText = "1";
-                        break;
+                    //set the apropriate library
+                    labelStatus.Text = "Creating Library...";
+                    this.Refresh();
+                    switch (radioButton1.Checked) //user library name selection
+                    {
+                        case true://use vendor name
+                            newTool.SelectSingleNode("/library").InnerText = tool.Vendor.ToString();
+                            libraryName = tool.Vendor.ToString();
+                            break;
+                        case false://use custom library
+                            newTool.SelectSingleNode("/library").InnerText = textBoxLibraryName.Text;
+                            libraryName = textBoxLibraryName.Text;
+                            break;
+                    }
+                    XmlNode libNode = doc.SelectSingleNode("//Libraries/Library[name='" + libraryName + "']");
+                    if (libNode == null)//library doesnt exist yet, add it.
+                    {
+                        templateLibrary.SelectSingleNode("/name").InnerText = libraryName;
+                        doc.SelectSingleNode("//Libraries").AppendChild(templateLibrary.CloneNode(true));
+                    }
+
+                    labelStatus.Text = "Updating Tool Attributes...";
+                    this.Refresh();
+                    newTool.SelectSingleNode("/comment").InnerText = tool.Description.ToString();
+                    newTool.SelectSingleNode("/brand_name").InnerText = tool.Vendor.ToString();
+                    newTool.SelectSingleNode("/series_name").InnerText = tool.Type.ToString();
+                    newTool.SelectSingleNode("/supplier").InnerText = tool.Vendor.ToString();
+                    newTool.SelectSingleNode("/supplier_pid").InnerText = tool.ProductId.ToString();
+                    newTool.SelectSingleNode("/series_name").InnerText = tool.Type.ToString();
+                    newTool.SelectSingleNode("/create_date").InnerText = tool.LastModified == null ? DateTimeOffset.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'") : DateTimeOffset.FromUnixTimeMilliseconds((long)tool.LastModified).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
+                    newTool.SelectSingleNode("/update_date").InnerText = DateTimeOffset.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
+                    newTool.SelectSingleNode("/id").InnerText = "0";
+                    newTool.SelectSingleNode("/user_id").InnerText = "0";
+                    switch (tool.Unit)
+                    {
+                        case "inches":
+                            newTool.SelectSingleNode("/diameter").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Dc.ToString();
+                            newTool.SelectSingleNode("/stickout").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Lb.ToString();
+                            newTool.SelectSingleNode("/Shank_Dia").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Sfdm.ToString();
+                            newTool.SelectSingleNode("/Flute_Len").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Lcf.ToString();
+                            newTool.SelectSingleNode("/Shoulder_Len").InnerText = tool.Geometry == null ? "0" : tool.Geometry.ShoulderLength.ToString();
+                            newTool.SelectSingleNode("/Shoulder_Dia").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Sfdm.ToString();
+                            newTool.SelectSingleNode("/diameter_mm").InnerText = "0";
+                            newTool.SelectSingleNode("/stickout_mm").InnerText = "0";
+                            newTool.SelectSingleNode("/Shank_Dia_mm").InnerText = "0";
+                            newTool.SelectSingleNode("/flute_len_mm").InnerText = "0";
+                            newTool.SelectSingleNode("/shoulder_len_mm").InnerText = "0";
+                            newTool.SelectSingleNode("/Shoulder_Dia_mm").InnerText = "0";
+                            break;
+                        case "millimeters":
+                            newTool.SelectSingleNode("/diameter").InnerText = "0";
+                            newTool.SelectSingleNode("/stickout").InnerText = "0";
+                            newTool.SelectSingleNode("/Shank_Dia").InnerText = "0";
+                            newTool.SelectSingleNode("/Flute_Len").InnerText = "0";
+                            newTool.SelectSingleNode("/Shoulder_Len").InnerText = "0";
+                            newTool.SelectSingleNode("/Shoulder_Dia").InnerText = "0";
+                            newTool.SelectSingleNode("/diameter_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Dc.ToString();
+                            newTool.SelectSingleNode("/stickout_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Lb.ToString();
+                            newTool.SelectSingleNode("/Shank_Dia_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Sfdm.ToString();
+                            newTool.SelectSingleNode("/flute_len_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Lcf.ToString();
+                            newTool.SelectSingleNode("/shoulder_len_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.ShoulderLength.ToString();
+                            newTool.SelectSingleNode("/Shoulder_Dia_mm").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Sfdm.ToString();
+                            break;
+                    }
+                    switch (tool.Type)
+                    {
+                        case "flat end mill":
+                            newTool.SelectSingleNode("/type").InnerText = "endmill";
+                            newTool.SelectSingleNode("/corner_rad").InnerText = "0";
+                            break;
+                        case "ball end mill":
+                            newTool.SelectSingleNode("/type").InnerText = "endmill";
+                            double rad = (double)(tool.Geometry.Dc == null ? 0 : tool.Geometry.Dc / 2);
+                            newTool.SelectSingleNode("/corner_rad").InnerText = rad.ToString();
+                            break;
+                        case "chamfer mill":
+                            newTool.SelectSingleNode("/type").InnerText = "chamfermill";
+                            newTool.SelectSingleNode("/corner_rad").InnerText = "0";
+                            break;
+                        case "thread mill":
+                            newTool.SelectSingleNode("/type").InnerText = "threadmill";
+                            newTool.SelectSingleNode("/corner_rad").InnerText = "0";
+                            break;
+                        default:
+                            newTool.SelectSingleNode("/type").InnerText = "endmill";
+                            newTool.SelectSingleNode("/corner_rad").InnerText = "0";
+                            break;
+                    }
+
+                    newTool.SelectSingleNode("/number").InnerText = tool.PostProcess == null ? "0" : tool.PostProcess.Number.ToString();
+                    newTool.SelectSingleNode("/Flute_N").InnerText = tool.Geometry == null ? "0" : tool.Geometry.Nof.ToString();
+                    switch (tool.Bmc)
+                    {
+                        case "carbide":
+                            newTool.SelectSingleNode("/tool_material_id").InnerText = "5";
+                            newTool.SelectSingleNode("/coating_id").InnerText = "1";
+                            break;
+                        case "ti coated":
+                            newTool.SelectSingleNode("/tool_material_id").InnerText = "5";
+                            newTool.SelectSingleNode("/coating_id").InnerText = "2";
+                            break;
+                        case "hss":
+                            newTool.SelectSingleNode("/tool_material_id").InnerText = "1";
+                            newTool.SelectSingleNode("/coating_id").InnerText = "1";
+                            break;
+                        case "ceramics":
+                            newTool.SelectSingleNode("/tool_material_id").InnerText = "10";
+                            newTool.SelectSingleNode("/coating_id").InnerText = "1";
+                            break;
+                        case "unspecified":
+                            newTool.SelectSingleNode("/tool_material_id").InnerText = "1";
+                            newTool.SelectSingleNode("/coating_id").InnerText = "1";
+                            break;
+                    }
+
+                    newTool.SelectSingleNode("/doc").InnerText = "0";
+                    newTool.SelectSingleNode("/woc").InnerText = "0";
+
+                    //add tool to document
+                    doc.SelectSingleNode("//Tools").AppendChild(newTool);
                 }
-
-                newTool.SelectSingleNode("/doc").InnerText = "0";
-                newTool.SelectSingleNode("/woc").InnerText = "0";
-
-                //add tool to document
-                doc.SelectSingleNode("//Tools").AppendChild(newTool);
             }
 
             //save out file
