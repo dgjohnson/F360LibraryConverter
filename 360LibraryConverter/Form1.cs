@@ -277,8 +277,8 @@ namespace _360LibraryConverter
             toolTip1.SetToolTip(btnConvert, "Click the button to create a new HSMAdvisor tool library file from the Fusion360 JSON information.");
             toolTip1.SetToolTip(radioButton1, "Select this to create libraries using the tools vendor name.");
             toolTip1.SetToolTip(radioButton2, "Select this to put all tools in a single library.");
-            toolTip1.SetToolTip(linkLabel1, "Subscribe to the channel for more like this.");
-            toolTip1.SetToolTip(pictureBox1, "Hey there!");
+            toolTip1.SetToolTip(linkLabel1, "Subscribe to the channel if this saved you some time!");
+            toolTip1.SetToolTip(pictureBox1, "Hi!");
             toolTip1.SetToolTip(textBoxLibraryName, "Enter a useful library name here!");
 
         }
