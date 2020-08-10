@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("F360LibraryConverter")]
+[assembly: AssemblyTitle("Fusion360 Library Converter")]
 [assembly: AssemblyDescription("Windows application that can convert Fusion360 Exported Tool Libraries in JSON format to HSMAdvisor compatible Library in XML format.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DIY.Engineering LLC")]

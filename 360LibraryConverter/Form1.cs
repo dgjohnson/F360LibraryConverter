@@ -4,7 +4,8 @@
 ///
 /// Windows application to translate JSON exported Fusion360 tool library into an HSMAdvisor-Compatible XML format.
 /// only supports basic conversion as the systems do not have complete parity in terms of the tool metrics that are defined and exported.
-/// *although this tool should work for most standard libraries, use it at your own risk!
+/// Although this tool should work for most standard Fusion360 tool libraries, no specific capability is implied.
+/// USE AT YOUR OWN RISK!
 /// 
 /// ©2020 DIY.Engineering LLC
 /// </summary>
