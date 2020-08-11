@@ -102,6 +102,7 @@ namespace _360LibraryConverter
             {
                 progressBar1.Value += 1;
                 labelStatus.Text = "Converting Tool: " + tool.Description;
+                this.progressBar1.Refresh();
                 this.Refresh();
 
                 if (tool.Type == "holder")
@@ -247,7 +248,6 @@ namespace _360LibraryConverter
             //done, provide feedback
             btnImport.BackColor = SystemColors.Highlight;
             btnConvert.BackColor = SystemColors.GradientInactiveCaption;
-
             playSound("tada.wav");
         }
 
@@ -278,9 +278,15 @@ namespace _360LibraryConverter
             toolTip1.SetToolTip(radioButton1, "Select this to create libraries using the tools vendor name.");
             toolTip1.SetToolTip(radioButton2, "Select this to put all tools in a single library.");
             toolTip1.SetToolTip(linkLabel1, "Subscribe to the channel if this saved you some time!");
+            toolTip1.SetToolTip(linkLabel2, "Download the source code to see how it works!");
             toolTip1.SetToolTip(pictureBox1, "Hi!");
             toolTip1.SetToolTip(textBoxLibraryName, "Enter a useful library name here!");
 
+        }
+
+        private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/dgjohnson/F360LibraryConverter");
         }
     }
 }
