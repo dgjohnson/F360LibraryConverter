@@ -33,7 +33,7 @@
             this.ImportFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnImport = new System.Windows.Forms.Button();
             this.lblImportFileName = new System.Windows.Forms.Label();
-            this.btnConvert = new System.Windows.Forms.Button();
+            this.btnConvertHSM = new System.Windows.Forms.Button();
             this.labelStatus = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -45,6 +45,7 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.btnConvertMill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -60,9 +61,9 @@
             this.btnImport.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImport.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnImport.Location = new System.Drawing.Point(149, 12);
+            this.btnImport.Location = new System.Drawing.Point(134, 12);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(245, 23);
+            this.btnImport.Size = new System.Drawing.Size(260, 23);
             this.btnImport.TabIndex = 0;
             this.btnImport.Text = "Select Fusion 360 Tool Library JSON File";
             this.btnImport.UseVisualStyleBackColor = false;
@@ -76,34 +77,34 @@
             this.lblImportFileName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblImportFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblImportFileName.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblImportFileName.Location = new System.Drawing.Point(149, 38);
+            this.lblImportFileName.Location = new System.Drawing.Point(134, 38);
             this.lblImportFileName.Name = "lblImportFileName";
-            this.lblImportFileName.Size = new System.Drawing.Size(245, 17);
+            this.lblImportFileName.Size = new System.Drawing.Size(260, 17);
             this.lblImportFileName.TabIndex = 1;
             this.lblImportFileName.Text = "Select a File to Import.";
             this.lblImportFileName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnConvert
+            // btnConvertHSM
             // 
-            this.btnConvert.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnConvert.Enabled = false;
-            this.btnConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConvert.Location = new System.Drawing.Point(149, 116);
-            this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(245, 23);
-            this.btnConvert.TabIndex = 4;
-            this.btnConvert.Text = "Convert To HSMAdvisor Tool Library File";
-            this.btnConvert.UseVisualStyleBackColor = false;
-            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            this.btnConvertHSM.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnConvertHSM.Enabled = false;
+            this.btnConvertHSM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConvertHSM.Location = new System.Drawing.Point(134, 116);
+            this.btnConvertHSM.Name = "btnConvertHSM";
+            this.btnConvertHSM.Size = new System.Drawing.Size(127, 23);
+            this.btnConvertHSM.TabIndex = 4;
+            this.btnConvertHSM.Text = "Create HSMAdvisor Lib";
+            this.btnConvertHSM.UseVisualStyleBackColor = false;
+            this.btnConvertHSM.Click += new System.EventHandler(this.BtnConvertHSM_Click);
             // 
             // labelStatus
             // 
             this.labelStatus.AutoEllipsis = true;
             this.labelStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.labelStatus.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.labelStatus.Location = new System.Drawing.Point(149, 142);
+            this.labelStatus.Location = new System.Drawing.Point(134, 142);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(245, 17);
+            this.labelStatus.Size = new System.Drawing.Size(260, 17);
             this.labelStatus.TabIndex = 5;
             this.labelStatus.Text = "Waiting...";
             this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -113,7 +114,7 @@
             this.pictureBox1.Image = global::_360LibraryConverter.Properties.Resources.DIYEngineering;
             this.pictureBox1.Location = new System.Drawing.Point(3, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(140, 201);
+            this.pictureBox1.Size = new System.Drawing.Size(116, 201);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
@@ -139,14 +140,14 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(140, 13);
             this.label2.TabIndex = 7;
-            this.label2.Text = "©2020 DIY.Engineering LLC";
+            this.label2.Text = "©2022 DIY.Engineering LLC";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(149, 162);
+            this.progressBar1.Location = new System.Drawing.Point(134, 162);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(245, 15);
+            this.progressBar1.Size = new System.Drawing.Size(260, 15);
             this.progressBar1.TabIndex = 6;
             // 
             // groupBox1
@@ -154,12 +155,12 @@
             this.groupBox1.Controls.Add(this.textBoxLibraryName);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(149, 58);
+            this.groupBox1.Location = new System.Drawing.Point(134, 58);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(245, 52);
+            this.groupBox1.Size = new System.Drawing.Size(260, 52);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "HSMAdvisor Library Name";
+            this.groupBox1.Text = "Library Name";
             // 
             // textBoxLibraryName
             // 
@@ -205,8 +206,21 @@
             this.linkLabel2.Size = new System.Drawing.Size(21, 9);
             this.linkLabel2.TabIndex = 11;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "v.1.0";
+            this.linkLabel2.Text = "v.2.0";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked_1);
+            // 
+            // btnConvertMill
+            // 
+            this.btnConvertMill.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnConvertMill.Enabled = false;
+            this.btnConvertMill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConvertMill.Location = new System.Drawing.Point(267, 116);
+            this.btnConvertMill.Name = "btnConvertMill";
+            this.btnConvertMill.Size = new System.Drawing.Size(126, 23);
+            this.btnConvertMill.TabIndex = 12;
+            this.btnConvertMill.Text = "Create Millalyzer Lib";
+            this.btnConvertMill.UseVisualStyleBackColor = false;
+            this.btnConvertMill.Click += new System.EventHandler(this.btnConvertMill_Click);
             // 
             // Form1
             // 
@@ -214,6 +228,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(408, 210);
+            this.Controls.Add(this.btnConvertMill);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.progressBar1);
@@ -221,7 +236,7 @@
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.labelStatus);
-            this.Controls.Add(this.btnConvert);
+            this.Controls.Add(this.btnConvertHSM);
             this.Controls.Add(this.lblImportFileName);
             this.Controls.Add(this.btnImport);
             this.DoubleBuffered = true;
@@ -245,7 +260,7 @@
         private System.Windows.Forms.OpenFileDialog ImportFileDialog;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Label lblImportFileName;
-        private System.Windows.Forms.Button btnConvert;
+        private System.Windows.Forms.Button btnConvertHSM;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
@@ -257,6 +272,7 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.Button btnConvertMill;
     }
 }
 

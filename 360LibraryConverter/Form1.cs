@@ -22,6 +22,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using CsvHelper;
+
 namespace _360LibraryConverter
 {
     public partial class Form1 : Form
@@ -37,17 +39,21 @@ namespace _360LibraryConverter
             {
                 lblImportFileName.Text = "Fusion360 Library to Import: " + Path.GetFileName(ImportFileDialog.FileName);
                 labelStatus.Text = "Waiting...";
-                btnConvert.Enabled = true;
+                btnConvertHSM.Enabled = true;
+                btnConvertMill.Enabled = true;
+                btnConvertMill.BackColor = SystemColors.Highlight;
                 btnImport.BackColor = SystemColors.GradientInactiveCaption;
-                btnConvert.BackColor = SystemColors.Highlight;
+                btnConvertHSM.BackColor = SystemColors.Highlight;
             }
             else
             {
                 lblImportFileName.Text = "Select a File to Import.";
                 labelStatus.Text = "Waiting...";
-                btnConvert.Enabled = false;
+                btnConvertHSM.Enabled = false;
                 btnImport.BackColor = SystemColors.Highlight;
-                btnConvert.BackColor = SystemColors.GradientInactiveCaption;
+                btnConvertHSM.BackColor = SystemColors.GradientInactiveCaption;
+                btnConvertMill.Enabled = true;
+                btnConvertMill.BackColor = SystemColors.GradientInactiveCaption;
             }
         }
 
@@ -71,7 +77,7 @@ namespace _360LibraryConverter
 
         }
 
-        private void btnConvert_Click(object sender, EventArgs e)
+        private void BtnConvertHSM_Click(object sender, EventArgs e)
         {
             // instantiate import object and load from json file
             labelStatus.Text = "Loading Export...";
@@ -247,7 +253,9 @@ namespace _360LibraryConverter
 
             //done, provide feedback
             btnImport.BackColor = SystemColors.Highlight;
-            btnConvert.BackColor = SystemColors.GradientInactiveCaption;
+            btnConvertHSM.BackColor = SystemColors.GradientInactiveCaption;
+            btnConvertMill.BackColor = SystemColors.GradientInactiveCaption;
+
             playSound("tada.wav");
         }
 
@@ -274,7 +282,7 @@ namespace _360LibraryConverter
             playSound("FairyDust.wav");
             toolTip1.SetToolTip(btnImport, "Select the tool library that was exported as JSON from Fusion360.");
             toolTip1.SetToolTip(groupBox1, "Select the way that tools should be grouped in HSMAdvisor.");
-            toolTip1.SetToolTip(btnConvert, "Click the button to create a new HSMAdvisor tool library file from the Fusion360 JSON information.");
+            toolTip1.SetToolTip(btnConvertHSM, "Click the button to create a new HSMAdvisor tool library file from the Fusion360 JSON information.");
             toolTip1.SetToolTip(radioButton1, "Select this to create libraries using the tools vendor name.");
             toolTip1.SetToolTip(radioButton2, "Select this to put all tools in a single library.");
             toolTip1.SetToolTip(linkLabel1, "Subscribe to the channel if this saved you some time!");
@@ -287,6 +295,80 @@ namespace _360LibraryConverter
         private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/dgjohnson/F360LibraryConverter");
+        }
+
+        private void btnConvertMill_Click(object sender, EventArgs e)
+        {
+            // instantiate import object and load from json file
+            labelStatus.Text = "Loading Export...";
+            this.Refresh();
+            var f360ToolLibrary = F360ToolLibrary.FromJson(System.IO.File.ReadAllText(ImportFileDialog.FileName));
+
+            int count = f360ToolLibrary.Data.Length;
+            progressBar1.Maximum = count;
+            progressBar1.Value = 0;
+
+            var MillalyzerRecords = new List<ToolEntry>();
+
+            //create xml tool node for each json tool
+            foreach (var tool in f360ToolLibrary.Data)
+            {
+                progressBar1.Value += 1;
+                labelStatus.Text = "Converting Tool: " + tool.Description;
+                this.progressBar1.Refresh();
+                this.Refresh();
+
+                if (tool.Type == "holder")
+                {
+                    continue;
+                }
+                else
+                {
+                    double factor = tool.Unit == "inches" ? 25.4:1;
+                    //setup new tool
+                    MillalyzerRecords.Add(new ToolEntry
+                    {
+                        Name = String.Format("{0} / {1} flute / {2}", tool.Vendor.ToString(),tool.Geometry.Nof.ToString(), tool.Type.ToString()),
+                        NOF = tool.Geometry.Nof.ToString(),
+                        DC = (tool.Geometry.Dc * factor).ToString(),
+                        DN = (tool.Geometry.Sfdm * factor).ToString(),
+                        DCON = (tool.Geometry.Sfdm * factor).ToString(),
+                        APMX = (tool.Geometry.Lcf * factor).ToString(),
+                        LN = (tool.Geometry.ShoulderLength * factor).ToString(),
+                        LT = (tool.Geometry.ShoulderLength * factor).ToString(),
+                        LXP = (tool.Geometry.Lb * factor).ToString(),
+                        LF = (tool.Geometry.Oal * factor).ToString(),
+                        FHA = 45.ToString(),
+                        RE = (tool.Geometry.Re * factor).ToString(),
+                        GAMF = 7.ToString(),
+                        GAMP = 5.ToString(),
+                        EDRD = 6.ToString(),
+                        MaterialType = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(tool.Bmc.ToLower()),
+                        CobaltPercent = 10.ToString(),
+                        HelixVariation = 0.ToString(),
+                        FluteSpread = 0.ToString(),
+                        OptMaterial = "PMKSN",
+                        KAPR = 0.ToString()
+                    });
+                }
+            }
+            //save out file
+            labelStatus.Text = "Saving File...";
+            this.Refresh();
+
+            using (var writer = new StreamWriter(Path.ChangeExtension(ImportFileDialog.FileName, ".csv")))
+            using (var csv = new CsvWriter(writer, System.Globalization.CultureInfo.InvariantCulture))
+            {
+                csv.WriteRecords(MillalyzerRecords);
+            }
+            labelStatus.Text = "Millalyzer Library Created: " + Path.GetFileName(Path.ChangeExtension(ImportFileDialog.FileName, ".csv"));
+
+            //done, provide feedback
+            btnImport.BackColor = SystemColors.Highlight;
+            btnConvertMill.BackColor = SystemColors.GradientInactiveCaption;
+            btnConvertHSM.BackColor = SystemColors.GradientInactiveCaption;
+            playSound("tada.wav");
+
         }
     }
 }

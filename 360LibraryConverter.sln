@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F360LibraryConverter", "360LibraryConverter\F360LibraryConverter.csproj", "{2B015458-8F84-48A2-9C55-8E418DBD51FC}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "F360LibraryConverter Setup", "..\F360LibraryConverter Setup\F360LibraryConverter Setup.vdproj", "{65C5914B-6F5A-4CB2-8DED-89622BB4223E}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "360LibraryConverterSetup", "360LibraryConverterSetup\360LibraryConverterSetup.vdproj", "{4FAA90AB-B782-4D2C-8C77-3C084B1DC008}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{2B015458-8F84-48A2-9C55-8E418DBD51FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B015458-8F84-48A2-9C55-8E418DBD51FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B015458-8F84-48A2-9C55-8E418DBD51FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65C5914B-6F5A-4CB2-8DED-89622BB4223E}.Debug|Any CPU.ActiveCfg = Debug
-		{65C5914B-6F5A-4CB2-8DED-89622BB4223E}.Release|Any CPU.ActiveCfg = Release
+		{4FAA90AB-B782-4D2C-8C77-3C084B1DC008}.Debug|Any CPU.ActiveCfg = Debug
+		{4FAA90AB-B782-4D2C-8C77-3C084B1DC008}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
